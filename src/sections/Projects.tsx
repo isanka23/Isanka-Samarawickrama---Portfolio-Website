@@ -3,6 +3,7 @@ import { projects } from "@/data/projects";
 import { SectionLabel } from "@/components/SectionLabel";
 import { Reveal } from "@/components/Reveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { handleSpotlight } from "@/hooks/useSpotlight";
 
 /** Pixels per second the track drifts on its own. */
 const SPEED = 38;
@@ -63,12 +64,6 @@ export function Projects() {
     return () => el.removeEventListener("scroll", onScroll);
   }, [wrap, paused]);
 
-  const nudge = (dir: 1 | -1) => {
-    const el = trackRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * (el.clientWidth * 0.8), behavior: "smooth" });
-  };
-
   return (
     <section id="projects" className="violet-wash relative py-24 md:py-32">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
@@ -78,30 +73,6 @@ export function Projects() {
             Featured Engineering Projects
           </h2>
         </Reveal>
-
-        <div className="mt-6 flex items-center justify-end gap-2">
-          <button
-            onClick={() => setPaused((p) => !p)}
-            aria-pressed={paused}
-            className="mr-1 rounded-full border border-white/12 px-4 py-2 font-mono text-[11px] text-mist transition hover:border-white/35 hover:text-chrome"
-          >
-            {paused ? "▶ Play" : "❚❚ Pause"}
-          </button>
-          <button
-            onClick={() => nudge(-1)}
-            aria-label="Previous projects"
-            className="rounded-full border border-white/12 p-3 transition hover:border-white/35 hover:bg-white/5"
-          >
-            <span aria-hidden>←</span>
-          </button>
-          <button
-            onClick={() => nudge(1)}
-            aria-label="Next projects"
-            className="rounded-full border border-white/12 p-3 transition hover:border-white/35 hover:bg-white/5"
-          >
-            <span aria-hidden>→</span>
-          </button>
-        </div>
       </div>
 
       <div className="relative mt-6">
@@ -116,7 +87,7 @@ export function Projects() {
         */}
         <div
           ref={trackRef}
-          className="flex gap-5 overflow-x-auto px-6 pb-6 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-5 overflow-x-auto px-6 pb-6 pt-3 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           tabIndex={0}
           aria-label="Project carousel"
           onMouseEnter={() => setPaused(true)}
@@ -130,7 +101,8 @@ export function Projects() {
               key={`${project.index}-${i}`}
               // The duplicate half is presentational only.
               aria-hidden={i >= projects.length}
-              className="panel group flex w-[86vw] shrink-0 flex-col rounded-2xl p-7 sm:w-[420px]"
+              onMouseMove={handleSpotlight}
+              className="panel spotlight lift group flex w-[86vw] shrink-0 flex-col rounded-2xl p-7 transition-colors hover:border-violet/40 sm:w-[420px]"
             >
               <div className="flex items-start justify-between gap-4">
                 <p className="label-mono">// Project {project.index}</p>
@@ -178,6 +150,28 @@ export function Projects() {
                     className="inline-flex items-center gap-2 font-mono text-xs text-signal transition-colors hover:text-chrome"
                   >
                     LIVE <span aria-hidden>↗</span>
+                  </a>
+                )}
+                {project.playStore && (
+                  <a
+                    href={project.playStore}
+                    target="_blank"
+                    rel="noreferrer"
+                    tabIndex={i >= projects.length ? -1 : undefined}
+                    className="inline-flex items-center gap-2 font-mono text-xs text-signal transition-colors hover:text-chrome"
+                  >
+                    PLAY STORE <span aria-hidden>↗</span>
+                  </a>
+                )}
+                {project.appStore && (
+                  <a
+                    href={project.appStore}
+                    target="_blank"
+                    rel="noreferrer"
+                    tabIndex={i >= projects.length ? -1 : undefined}
+                    className="inline-flex items-center gap-2 font-mono text-xs text-signal transition-colors hover:text-chrome"
+                  >
+                    APP STORE <span aria-hidden>↗</span>
                   </a>
                 )}
               </div>

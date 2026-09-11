@@ -12,6 +12,8 @@ export type Project = {
   tech: string[];
   code?: string;
   live?: string;
+  playStore?: string;
+  appStore?: string;
 };
 
 export const projects: Project[] = [
@@ -32,7 +34,6 @@ export const projects: Project[] = [
       "Scalable event platform with Cloudinary-powered media handling, automated similar-event suggestions, and PostHog behaviour tracking.",
     tech: ["Next.js", "TypeScript", "Cloudinary", "PostHog"],
     code: "https://github.com/isanka23/EventLoop",
-    live: "https://event-loop-alpha.vercel.app",
   },
   {
     index: "03",
@@ -69,5 +70,25 @@ export const projects: Project[] = [
       "Task manager built around Go Router for navigation and Hive for fast local persistence.",
     tech: ["Flutter", "Dart", "Go Router", "Hive"],
     code: "https://github.com/isanka23/Todo_App_with_Go_Router_Hive_Packages",
+  },
+  {
+    index: "07",
+    title: "Mosam",
+    category: "Mobile / Flutter · Client Project",
+    blurb:
+      "Novel reading app published on the App Store and Play Store, built for renowned Sri Lankan author Sujeewa Prasannaarachchi. Shipped as mobile developer at Azbow.",
+    tech: ["Flutter", "Dart"],
+    playStore: "https://play.google.com/store/apps/details?id=com.azbow.mosamApp&pcampaignid=web_share",
+    appStore: "https://apps.apple.com/lk/app/mosam-sujeewa-prasannaarachchi/id6749929485",
+  },
+  {
+    index: "08",
+    title: "Bhawana",
+    category: "Mobile / Flutter · Client Project",
+    blurb:
+      "Magazine reading app published on the App Store and Play Store, built for renowned Sri Lankan author Sujeewa Prasannaarachchi. Shipped as mobile developer at Azbow.",
+    tech: ["Flutter", "Dart"],
+    playStore: "https://play.google.com/store/apps/details?id=com.azbow.bhawana&pcampaignid=web_share",
+    appStore: "https://apps.apple.com/lk/app/bhawana/id6504860966",
   },
 ];

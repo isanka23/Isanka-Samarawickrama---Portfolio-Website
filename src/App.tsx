@@ -4,6 +4,7 @@ import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { BootLoader } from "@/components/BootLoader";
+import { CursorGlow } from "@/components/CursorGlow";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/sections/Hero";
 import { About } from "@/sections/About";
@@ -48,6 +49,7 @@ export default function App() {
   return (
     <>
       <BootLoader progress={progress} />
+      <CursorGlow />
       <Nav />
       <main aria-busy={!booted}>
         <Hero />

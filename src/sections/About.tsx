@@ -1,6 +1,7 @@
 import { profile } from "@/data/profile";
 import { SectionLabel } from "@/components/SectionLabel";
 import { Reveal } from "@/components/Reveal";
+import { handleSpotlight } from "@/hooks/useSpotlight";
 
 export function About() {
   return (
@@ -8,8 +9,11 @@ export function About() {
       <div className="mx-auto grid max-w-[1200px] items-center gap-14 md:grid-cols-2">
         <Reveal>
           {/* Placeholder portrait — swap for a real image. */}
-          <div className="panel aspect-[4/5] overflow-hidden rounded-3xl">
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.07] to-transparent">
+          <div
+            onMouseMove={handleSpotlight}
+            className="panel spotlight lift group aspect-[4/5] overflow-hidden rounded-3xl"
+          >
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.07] to-transparent transition-transform duration-500 group-hover:scale-105">
               <span className="label-mono text-center leading-relaxed">
                 Portrait
                 <br />
@@ -27,6 +31,12 @@ export function About() {
             {profile.fullName}
           </h2>
           <p className="mt-6 max-w-md leading-relaxed text-mist">{profile.bio}</p>
+
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-mist">
+            I work alongside AI tools — Claude, ChatGPT, and Gemini — to move
+            faster through research, debugging, and iteration, while keeping
+            design decisions and code quality my own.
+          </p>
 
           <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-white/8 pt-8">
             <div>

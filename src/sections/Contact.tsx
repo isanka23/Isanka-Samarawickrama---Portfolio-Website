@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { SectionLabel } from "@/components/SectionLabel";
+import { handleSpotlight } from "@/hooks/useSpotlight";
 
 const schema = z.object({
   firstName: z.string().min(1, "Required"),
@@ -58,7 +59,7 @@ export function Contact() {
             directly below.
           </p>
 
-          <div className="panel mt-9 rounded-2xl p-5">
+          <div onMouseMove={handleSpotlight} className="panel spotlight mt-9 rounded-2xl p-5">
             <p className="label-mono mb-4">// payload_preview.json</p>
             <pre className="overflow-x-auto font-mono text-[12.5px] leading-relaxed">
               <code>
@@ -98,7 +99,12 @@ export function Contact() {
         </div>
 
         {/* Right — form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="panel rounded-2xl p-6 md:p-8" noValidate>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          onMouseMove={handleSpotlight}
+          className="panel spotlight rounded-2xl p-6 md:p-8"
+          noValidate
+        >
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="firstName" className="label-mono mb-2 block">First Name</label>
@@ -136,7 +142,7 @@ export function Contact() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-7 w-full rounded-full bg-chrome px-6 py-3.5 text-sm font-semibold text-void transition hover:bg-white disabled:opacity-55"
+            className="shine mt-7 w-full rounded-full bg-chrome px-6 py-3.5 text-sm font-semibold text-void transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_40px_-12px_rgb(255_255_255/0.35)] disabled:translate-y-0 disabled:opacity-55"
           >
             {isSubmitting ? "Transmitting…" : "Send Transmission"}
           </button>

@@ -63,7 +63,7 @@ export function Nav() {
 
         <a
           href="#contact"
-          className="rounded-full border border-white/15 px-5 py-2 text-xs font-semibold transition hover:border-white/40 hover:bg-white/5"
+          className="shine rounded-full border border-white/15 px-5 py-2 text-xs font-semibold transition hover:-translate-y-0.5 hover:border-violet/50 hover:bg-white/5"
         >
           Hire Me
         </a>

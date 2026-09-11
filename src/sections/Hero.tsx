@@ -147,13 +147,13 @@ export function Hero() {
           <div className="flex gap-3">
             <a
               href="#projects"
-              className="rounded-full bg-chrome px-7 py-3 text-sm font-semibold text-void transition hover:bg-white"
+              className="shine rounded-full bg-chrome px-7 py-3 text-sm font-semibold text-void transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_40px_-12px_rgb(255_255_255/0.35)]"
             >
               View My Work
             </a>
             <a
               href="#contact"
-              className="rounded-full border border-white/15 bg-void/70 px-7 py-3 text-sm font-semibold text-chrome backdrop-blur transition hover:border-white/35"
+              className="shine rounded-full border border-white/15 bg-void/70 px-7 py-3 text-sm font-semibold text-chrome backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-violet/50"
             >
               Contact Me
             </a>

@@ -99,6 +99,89 @@
     opacity: 0.028;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+
+  /* Cursor-tracked glow, driven by --x/--y set on mousemove (see useSpotlight) */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      380px circle at var(--x, 50%) var(--y, 50%),
+      rgb(109 92 231 / 0.18),
+      transparent 72%
+    );
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out-expo);
+    pointer-events: none;
+  }
+  .spotlight:hover::before,
+  .spotlight:focus-within::before {
+    opacity: 1;
+  }
+
+  /* Lift + glow on hover, paired with .spotlight on cards */
+  .lift {
+    transition:
+      transform 0.45s var(--ease-out-expo),
+      box-shadow 0.45s var(--ease-out-expo),
+      border-color 0.3s ease;
+  }
+  .lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 70px -30px rgb(109 92 231 / 0.45);
+  }
+
+  /* Diagonal shine sweep for primary buttons */
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: -60%;
+    width: 40%;
+    background: linear-gradient(
+      115deg,
+      transparent,
+      rgb(255 255 255 / 0.5),
+      transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.75s var(--ease-out-expo);
+    pointer-events: none;
+  }
+  .shine:hover::after {
+    left: 130%;
+  }
+
+  /* Animated underline that grows from center */
+  .underline-grow {
+    position: relative;
+  }
+  .underline-grow::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: var(--color-violet);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.35s var(--ease-out-expo);
+  }
+  .underline-grow:hover::after,
+  .underline-grow[data-active="true"]::after {
+    transform: scaleX(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

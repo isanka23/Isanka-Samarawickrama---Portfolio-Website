@@ -4,7 +4,7 @@ import { Reveal } from "@/components/Reveal";
 
 export function Timeline() {
   return (
-    <section id="timeline" className="px-6 py-24 md:px-12 md:py-32">
+    <section id="timeline" className="relative px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1000px]">
         <Reveal className="text-center">
           <SectionLabel>// Engineering Roadmap</SectionLabel>

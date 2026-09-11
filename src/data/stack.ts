@@ -14,4 +14,5 @@ export const stackRowTwo = [
   "Flutter", "Dart", "Provider", "Go Router", "Hive",
   "Firebase", "Cloud Firestore", "SharedPreferences",
   "Android", "iOS", "Swift", "Git", "Postman", "Figma",
+  "Claude", "ChatGPT", "Gemini", "GitHub Copilot",
 ];

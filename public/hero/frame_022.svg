@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="34%" r="62%">
+      <stop offset="0%" stop-color="#f6f4ef" stop-opacity="0.343"/>
+      <stop offset="55%" stop-color="#6d5ce7" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#08080a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e9e6df" stop-opacity="0.722"/>
+      <stop offset="100%" stop-color="#8d8a84" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="1600" fill="#0b0b0f"/>
+  <rect width="1200" height="1600" fill="url(#glow)"/>
+
+  <!-- shoulders / torso -->
+  <path d="M 305.1788356126998 1600
+           C 325.1788356126998 1170, 435.1788356126998 1070, 605.1788356126998 1070
+           C 775.1788356126998 1070, 885.1788356126998 1170, 905.1788356126998 1600
+           Z" fill="url(#body)"/>
+
+  <!-- neck -->
+  <rect x="561.1788356126998" y="960" width="88" height="140" rx="38"
+        fill="#cfcac1" opacity="0.503"/>
+
+  <!-- head -->
+  <ellipse cx="605.1788356126998" cy="840" rx="218.59731935256107" ry="196"
+           fill="#d8d3c9" opacity="0.603"/>
+
+  <!-- hair bun -->
+  <circle cx="596.8130242383387" cy="664" r="62"
+          fill="#2e2a26" opacity="0.88"/>
+
+  <!-- rim light, strongest in profile -->
+  <ellipse cx="636.5287317380341" cy="840"
+           rx="20.78860379145371" ry="184"
+           fill="#ffffff" opacity="0.160"/>
+
+  <text x="600" y="112" text-anchor="middle"
+        font-family="monospace" font-size="34" fill="#6d5ce7" opacity="0.62">
+    PLACEHOLDER FRAME 022 / 48
+  </text>
+  <text x="600" y="160" text-anchor="middle"
+        font-family="monospace" font-size="22" fill="#8b8b99" opacity="0.5">
+    169° — replace with real turnaround
+  </text>
+</svg>

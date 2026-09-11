@@ -1,4 +1,8 @@
-/** DUMMY DATA — horizontal carousel cards. */
+/**
+ * PLACEHOLDER PROJECTS — shaped around backend / web / mobile so the section
+ * reads correctly, but these are NOT real. Replace each one with work you
+ * actually shipped before publishing, and point `code` at the real repos.
+ */
 export type Project = {
   index: string;
   title: string;
@@ -12,56 +16,56 @@ export type Project = {
 export const projects: Project[] = [
   {
     index: "01",
-    title: "Neural Search Engine",
-    category: "AI / Retrieval",
+    title: "Delivery Tracking App",
+    category: "Mobile / Flutter",
     blurb:
-      "Hybrid vector and keyword search over 8M documents, returning ranked results in under 120ms.",
-    tech: ["Python", "FastAPI", "pgvector", "React"],
-    code: "https://github.com/example",
+      "Cross-platform Flutter app with live order tracking, push notifications, and offline-first local caching.",
+    tech: ["Flutter", "Dart", "Firebase", "Google Maps"],
+    code: "https://github.com/isanka23",
   },
   {
     index: "02",
-    title: "Payment Gateway System",
-    category: "Fintech & Security",
+    title: "Inventory Management API",
+    category: "Backend / REST",
     blurb:
-      "Developed a full-stack payment processing simulator with idempotent transaction handling and audit trails.",
-    tech: ["Node.js", "PostgreSQL", "Stripe", "Redis"],
-    code: "https://github.com/example",
+      "Node.js REST API with role-based access control, stock reconciliation, and audit logging across warehouses.",
+    tech: ["Node.js", "Express", "PostgreSQL", "JWT"],
+    code: "https://github.com/isanka23",
   },
   {
     index: "03",
-    title: "Multi-Tenant SaaS Platform",
-    category: "Cloud Architecture",
+    title: "Business Dashboard",
+    category: "Web Frontend",
     blurb:
-      "Architected a containerized multi-tenant SaaS platform enforcing strict tenant data isolation and secure schema routing.",
-    tech: ["Node.js", "MongoDB", "Docker", "Express"],
-    code: "https://github.com/example",
+      "Responsive React dashboard surfacing sales and stock metrics, with filtering and exportable reports.",
+    tech: ["React", "TypeScript", "Tailwind", "Chart.js"],
+    code: "https://github.com/isanka23",
   },
   {
     index: "04",
-    title: "Productivity Suite Extension",
-    category: "Browser Automation",
+    title: "Appointment Booking Platform",
+    category: "Full-Stack",
     blurb:
-      "Developed a browser extension leveraging Chrome APIs to automate repetitive workflows and boost daily efficiency.",
-    tech: ["JavaScript", "Chrome APIs", "Tailwind CSS"],
-    code: "https://github.com/example",
+      "End-to-end booking system — Flutter client, Express API, and an admin web panel sharing one data layer.",
+    tech: ["Flutter", "Node.js", "MongoDB", "React"],
+    code: "https://github.com/isanka23",
   },
   {
     index: "05",
-    title: "Realtime Collab Canvas",
-    category: "Distributed Systems",
+    title: "Expense Tracker",
+    category: "Mobile / Flutter",
     blurb:
-      "CRDT-backed whiteboard supporting 200 concurrent editors per room with offline reconciliation.",
-    tech: ["TypeScript", "WebSocket", "Yjs", "Canvas"],
-    code: "https://github.com/example",
+      "Offline-capable personal finance app with local persistence, category budgets, and monthly summaries.",
+    tech: ["Flutter", "Dart", "SQLite", "Riverpod"],
+    code: "https://github.com/isanka23",
   },
   {
     index: "06",
-    title: "Vision QC Pipeline",
-    category: "Computer Vision",
+    title: "Auth & Identity Service",
+    category: "Backend / Security",
     blurb:
-      "On-device defect detection for a manufacturing line, cutting manual inspection load by 78%.",
-    tech: ["PyTorch", "ONNX", "OpenCV", "Rust"],
-    code: "https://github.com/example",
+      "Reusable authentication service handling registration, refresh tokens, password reset, and session revocation.",
+    tech: ["Node.js", "Express", "Redis", "JWT"],
+    code: "https://github.com/isanka23",
   },
 ];

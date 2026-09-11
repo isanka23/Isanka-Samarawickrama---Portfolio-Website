@@ -27,6 +27,17 @@ Every personal detail lives in `src/data/`. Nothing is hardcoded in components.
 
 Replace those seven files and the site is yours.
 
+### Still placeholder — replace before publishing
+
+The repo is **public**, so anything here is readable under a real name:
+
+- `timeline.ts` — employment history. Currently prompts rather than claims.
+- `certifications.ts` — currently prompts rather than claims. Delete the
+  section from `src/App.tsx` if there is nothing to list.
+- `projects.ts` — shaped around backend/web/mobile but **not real work**.
+  Swap in shipped projects and point `code` at the actual repos.
+- `profile.ts` — `email` and the LinkedIn/Instagram links are still examples.
+
 ## The hero frame-scrub
 
 The signature effect: scrolling scrubs a portrait turnaround while the headline

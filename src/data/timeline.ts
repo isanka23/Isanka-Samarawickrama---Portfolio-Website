@@ -1,4 +1,10 @@
-/** DUMMY DATA — the "// ENGINEERING ROADMAP" timeline. */
+/**
+ * ⚠️ PLACEHOLDER — replace with your real history before publishing.
+ *
+ * The previous entries invented employers and dates. Since this repo is public
+ * under your real name, these are deliberately generic rather than fabricated
+ * specifics: swap in actual roles, or delete entries you cannot fill.
+ */
 export type Milestone = {
   period: string;
   role: string;
@@ -8,31 +14,24 @@ export type Milestone = {
 
 export const timeline: Milestone[] = [
   {
-    period: "2025 — Present",
-    role: "Senior Full-Stack Engineer",
-    org: "Northwind Labs",
+    period: "Present",
+    role: "Full-Stack & Mobile Engineer",
+    org: "Add your current role",
     detail:
-      "Leading a four-person platform team. Cut p95 API latency 62% by moving hot paths to an event-driven read model.",
+      "Describe what you own end to end — the backend services, the web frontend, and the Flutter apps you ship.",
   },
   {
-    period: "2023 — 2025",
-    role: "Full-Stack Engineer",
-    org: "Meridian Systems",
+    period: "Add period",
+    role: "Add role",
+    org: "Add employer or client",
     detail:
-      "Built the multi-tenant billing core serving 40k organizations. Owned the migration from monolith to service boundaries.",
+      "One or two sentences on the problem, what you built, and a number if you have one (users, latency, release cadence).",
   },
   {
-    period: "2022 — 2023",
-    role: "ML Engineer, Contract",
-    org: "Cobalt AI",
+    period: "Add period",
+    role: "Add role",
+    org: "Add employer or client",
     detail:
-      "Shipped a document-extraction pipeline processing 2M pages/month at 97.4% field accuracy.",
-  },
-  {
-    period: "2021 — 2022",
-    role: "Frontend Developer",
-    org: "Studio Kestrel",
-    detail:
-      "Delivered twelve client marketing sites. Established the shared component library still in use today.",
+      "Keep each entry concrete. Reviewers skim this section, so lead with impact rather than tooling.",
   },
 ];

@@ -1,4 +1,4 @@
-/** DUMMY DATA — the four "// ROOT 0n" capability cards. */
+/** The four "// ROOT 0n" capability cards. */
 export type Expertise = {
   id: string;
   title: string;
@@ -9,26 +9,30 @@ export type Expertise = {
 export const expertise: Expertise[] = [
   {
     id: "root-01",
-    title: "Frontend Development",
-    blurb: "Architecting responsive, high-performance UI components.",
-    tag: "React & Tailwind",
+    title: "Backend Development",
+    blurb:
+      "Designing REST APIs, relational schemas, and authentication flows that stay fast under load.",
+    tag: "APIs & Databases",
   },
   {
     id: "root-02",
-    title: "Backend Development",
-    blurb: "Building robust REST APIs and secure data pipelines.",
-    tag: "Node.js & Databases",
+    title: "Web Frontend",
+    blurb:
+      "Building responsive, accessible interfaces with modern component architecture.",
+    tag: "React & Tailwind",
   },
   {
     id: "root-03",
-    title: "AI & Machine Learning",
-    blurb: "Integrating intelligent models into production workflows.",
-    tag: "Generative AI & LLMs",
+    title: "Mobile Development",
+    blurb:
+      "Shipping iOS and Android from one Flutter codebase, with native performance and feel.",
+    tag: "Flutter & Dart",
   },
   {
     id: "root-04",
-    title: "Cloud & Deployment",
-    blurb: "Containerized delivery with zero-downtime releases.",
-    tag: "Docker & CI/CD",
+    title: "Deployment & Delivery",
+    blurb:
+      "Version control, CI pipelines, and release workflows to the web and app stores.",
+    tag: "Git & CI/CD",
   },
 ];

@@ -1,5 +1,5 @@
 /**
- * DUMMY DATA — replace every value here with the real profile.
+ * Replace the remaining placeholder values (email, socials) with real ones.
  * Nothing else in the app hardcodes personal details.
  */
 export const profile = {
@@ -7,43 +7,43 @@ export const profile = {
   lastName: "Samarawickrama",
   fullName: "Isanka Samarawickrama",
   legalName: "Isanka Samarawickrama",
-  role: "Full-Stack AI & ML Engineer",
-  tagline: "Turning ideas into reality",
-  email: "hello@example.com",
-  region: "Remote / Worldwide",
+  role: "Full-Stack & Mobile Engineer",
+  tagline: "Backend, web, and mobile — end to end",
+  email: "hello@example.com", // TODO: real address
+  region: "Sri Lanka / Remote",
   status: "Open to Opportunities",
   year: 2026,
 
-  bio: "A passionate Full-Stack Developer dedicated to crafting clean, functional, and highly scalable web applications. Specializing in high-performance architectures, intuitive user experiences, and robust backend pipelines.",
+  bio: "A full-stack engineer building across the whole product surface — REST APIs and data layers on the backend, responsive interfaces on the web, and cross-platform mobile apps in Flutter. I care about shipping software that holds up: clean architecture, predictable performance, and interfaces people can actually use.",
 
   socials: [
-    { label: "GitHub", href: "https://github.com/example" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/example" },
-    { label: "Instagram", href: "https://instagram.com/example" },
+    { label: "GitHub", href: "https://github.com/isanka23" },
+    { label: "LinkedIn", href: "https://linkedin.com/in/example" }, // TODO
+    { label: "Instagram", href: "https://instagram.com/example" }, // TODO
   ],
 } as const;
 
 /**
- * Hero headline phases. Scroll progress is split evenly across these,
- * so each phase owns a slice of the portrait turnaround.
+ * Hero headline phases — one per discipline. Scroll progress is split evenly
+ * across these, so each phase owns a slice of the portrait turnaround.
  */
 export const heroPhases = [
   {
-    headline: ["Creative", "Developer"],
+    headline: ["Full-Stack", "Developer"],
     label: "// Turning ideas into reality",
     caption:
-      "Available for hire. Building fast, responsive web applications using modern tech stacks.",
+      "Available for hire. Building complete products from database schema to shipped interface.",
   },
   {
-    headline: ["Scalable", "Systems"],
-    label: "// Robust backend architecture",
+    headline: ["Scalable", "Backends"],
+    label: "// Robust server architecture",
     caption:
-      "Architecting robust backend pipelines, cloud microservices, and database optimization.",
+      "Designing REST APIs, relational data models, authentication flows, and the services behind them.",
   },
   {
-    headline: ["Intelligent", "Interfaces"],
-    label: "// Applied machine learning",
+    headline: ["Cross-Platform", "Mobile"],
+    label: "// Flutter engineering",
     caption:
-      "Shipping production ML — retrieval pipelines, LLM tooling, and computer vision at scale.",
+      "Shipping iOS and Android from a single Flutter codebase — native feel, one team, half the maintenance.",
   },
 ] as const;

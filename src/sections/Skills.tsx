@@ -45,8 +45,8 @@ export function Skills() {
           Technologies I Work With
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-mist">
-          Full-stack expertise across modern web development, artificial
-          intelligence, and cloud infrastructure.
+          Backend services, responsive web interfaces, and cross-platform
+          mobile applications.
         </p>
       </Reveal>
 

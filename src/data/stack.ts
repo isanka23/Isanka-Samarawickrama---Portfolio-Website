@@ -1,15 +1,17 @@
 /**
- * DUMMY DATA — marquee chips.
- * Two rows scroll in opposite directions, as in the reference.
+ * Marquee chips. Two rows scroll in opposite directions.
+ * Row one leans backend + web, row two leans mobile + tooling.
+ *
+ * Trim anything here you would not want to be asked about in an interview.
  */
 export const stackRowOne = [
-  "React", "TypeScript", "Next.js", "Tailwind", "Bootstrap", "Node.js",
-  "Express.js", "Java", "Python", "REST APIs", "JWT Auth", "MySQL",
-  "MongoDB", "PostgreSQL", "Redis", "GraphQL",
+  "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS",
+  "HTML5", "CSS3", "Node.js", "Express.js", "REST APIs",
+  "JWT Auth", "MySQL", "PostgreSQL", "MongoDB", "Firebase",
 ];
 
 export const stackRowTwo = [
-  "Generative AI", "LLMs", "Computer Vision", "Prompt Engineering",
-  "Machine Learning", "NLP", "PyTorch", "TensorFlow", "Docker",
-  "Kubernetes", "AWS", "Vercel", "Git", "CI/CD", "Figma", "Linux",
+  "Flutter", "Dart", "Riverpod", "Provider", "Android",
+  "iOS", "Firebase Auth", "Cloud Firestore", "Push Notifications",
+  "Git", "GitHub Actions", "Docker", "Postman", "Figma", "Linux",
 ];

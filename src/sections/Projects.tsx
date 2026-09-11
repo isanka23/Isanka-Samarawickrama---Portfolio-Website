@@ -77,16 +77,28 @@ export function Projects() {
               ))}
             </div>
 
-            {project.code && (
-              <a
-                href={project.code}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex items-center gap-2 font-mono text-xs text-chrome transition-colors hover:text-violet"
-              >
-                CODE <span aria-hidden>→</span>
-              </a>
-            )}
+            <div className="mt-6 flex items-center gap-5">
+              {project.code && (
+                <a
+                  href={project.code}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 font-mono text-xs text-chrome transition-colors hover:text-violet"
+                >
+                  CODE <span aria-hidden>→</span>
+                </a>
+              )}
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 font-mono text-xs text-signal transition-colors hover:text-chrome"
+                >
+                  LIVE <span aria-hidden>↗</span>
+                </a>
+              )}
+            </div>
           </article>
         ))}
       </div>

@@ -1,9 +1,9 @@
 /**
- * ⚠️ PLACEHOLDER — replace with your real history before publishing.
+ * Based on public details from github.com/isanka23 (@azbow, Colombo,
+ * Software Engineering undergraduate).
  *
- * The previous entries invented employers and dates. Since this repo is public
- * under your real name, these are deliberately generic rather than fabricated
- * specifics: swap in actual roles, or delete entries you cannot fill.
+ * ⚠️ Dates are placeholders — fill in the real periods, and expand each
+ * `detail` with what you actually built and owned.
  */
 export type Milestone = {
   period: string;
@@ -15,23 +15,16 @@ export type Milestone = {
 export const timeline: Milestone[] = [
   {
     period: "Present",
-    role: "Full-Stack & Mobile Engineer",
-    org: "Add your current role",
+    role: "Junior Software Engineer",
+    org: "Azbow (pvt) Ltd",
     detail:
-      "Describe what you own end to end — the backend services, the web frontend, and the Flutter apps you ship.",
+      "Building across backend, web frontend, and Flutter mobile. Replace this with the systems you own and the problems you solved.",
   },
   {
-    period: "Add period",
-    role: "Add role",
-    org: "Add employer or client",
+    period: "Add years",
+    role: "Software Engineering Undergraduate",
+    org: "Add your university",
     detail:
-      "One or two sentences on the problem, what you built, and a number if you have one (users, latency, release cadence).",
-  },
-  {
-    period: "Add period",
-    role: "Add role",
-    org: "Add employer or client",
-    detail:
-      "Keep each entry concrete. Reviewers skim this section, so lead with impact rather than tooling.",
+      "Final year project: AquaClean, an underwater waste detection system using computer vision.",
   },
 ];

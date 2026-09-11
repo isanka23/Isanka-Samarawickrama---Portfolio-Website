@@ -3,6 +3,9 @@ import { SectionLabel } from "@/components/SectionLabel";
 import { Reveal } from "@/components/Reveal";
 
 export function Certifications() {
+  // Nothing to show yet — render nothing rather than an empty heading.
+  if (certifications.length === 0) return null;
+
   return (
     <section id="certifications" className="px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1100px]">

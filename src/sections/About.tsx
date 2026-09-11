@@ -37,6 +37,14 @@ export function About() {
               <dt className="label-mono">// Region</dt>
               <dd className="mt-1 text-sm">{profile.region}</dd>
             </div>
+            <div>
+              <dt className="label-mono">// Currently</dt>
+              <dd className="mt-1 text-sm">{profile.company}</dd>
+            </div>
+            <div>
+              <dt className="label-mono">// Focus</dt>
+              <dd className="mt-1 text-sm">Backend · Web · Mobile</dd>
+            </div>
           </dl>
         </Reveal>
       </div>

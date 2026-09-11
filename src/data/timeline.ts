@@ -1,9 +1,6 @@
 /**
  * Based on public details from github.com/isanka23 (@azbow, Colombo,
- * Software Engineering undergraduate).
- *
- * ⚠️ Dates are placeholders — fill in the real periods, and expand each
- * `detail` with what you actually built and owned.
+ * BSc (Hons) Software Engineering graduate).
  */
 export type Milestone = {
   period: string;

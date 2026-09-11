@@ -1,4 +1,5 @@
 import { profile } from "@/data/profile";
+import { LocalClock } from "@/components/LocalClock";
 
 export function Footer() {
   return (
@@ -25,7 +26,9 @@ export function Footer() {
           <div className="sm:text-right">
             <p className="label-mono">// Region</p>
             <p className="mt-2 font-mono text-xs text-mist">{profile.region}</p>
-            <p className="font-mono text-xs text-mist">{profile.year}</p>
+            <div className="mt-1 sm:ml-auto sm:w-fit">
+              <LocalClock />
+            </div>
           </div>
         </div>
 

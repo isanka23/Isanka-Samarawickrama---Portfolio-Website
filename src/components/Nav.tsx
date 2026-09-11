@@ -6,30 +6,34 @@ export function Nav() {
   const [active, setActive] = useState<string>("home");
   const [solid, setSolid] = useState(false);
 
+  // Scroll-spy: whichever nav section's top has most recently crossed the
+  // ~35%-down line stays active. Position-based rather than intersection-based
+  // so it keeps working across the un-navved sections (Philosophy, Pipeline)
+  // sitting between the tracked ones — an IntersectionObserver band can go
+  // empty while scrolling through those gaps and freeze on the last hit.
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 40);
+    const sections = navItems
+      .map(({ id }) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    const onScroll = () => {
+      setSolid(window.scrollY > 40);
+
+      const line = window.innerHeight * 0.35;
+      let current = sections[0]?.id;
+      for (const el of sections) {
+        if (el.getBoundingClientRect().top <= line) current = el.id;
+      }
+      if (current) setActive(current);
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Scroll-spy: the section nearest the top third wins.
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(visible.target.id);
-      },
-      { rootMargin: "-30% 0px -60% 0px", threshold: [0, 0.25, 0.5] },
-    );
-
-    navItems.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (

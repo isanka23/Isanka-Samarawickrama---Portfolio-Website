@@ -1,158 +1,136 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useState } from "react";
+import { profile } from "@/data/profile";
 import { SectionLabel } from "@/components/SectionLabel";
+import { Reveal } from "@/components/Reveal";
 import { handleSpotlight } from "@/hooks/useSpotlight";
 
-const schema = z.object({
-  firstName: z.string().min(1, "Required"),
-  lastName: z.string().min(1, "Required"),
-  email: z.string().email("Enter a valid email"),
-  message: z.string().min(10, "Tell me a little more (10+ characters)"),
-  consent: z.literal(true, {
-    message: "Permission is required to reply",
-  }),
-  // Honeypot — bots fill it, humans never see it.
-  website: z.string().max(0).optional(),
-});
+const mailIcon = (
+  <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} className="h-6 w-6 stroke-current">
+    <rect x="3" y="5" width="18" height="14" rx="2" />
+    <path d="M3 7l9 6 9-6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
-type FormValues = z.infer<typeof schema>;
+const arrowIcon = (
+  <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} className="h-4 w-4 stroke-current">
+    <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
-const awaiting = (value: string, placeholder: string) =>
-  value?.trim() ? value : `[Awaiting ${placeholder}]`;
+function CopyEmailButton({ email }: { email: string }) {
+  const [copied, setCopied] = useState(false);
 
-export function Contact() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: { firstName: "", lastName: "", email: "", message: "" },
-  });
-
-  const values = watch();
-
-  const onSubmit = async (data: FormValues) => {
-    // TODO: wire to Resend / Formspree. Stubbed so the UI is exercisable.
-    await new Promise((r) => setTimeout(r, 900));
-    console.info("contact payload", data);
-    reset();
+  const onCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // Clipboard API unavailable — the mailto button still works.
+    }
   };
 
-  const field =
-    "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-sm outline-none transition placeholder:text-mist/60 focus:border-violet/60";
-
   return (
-    <section id="contact" className="violet-wash relative px-6 py-24 md:px-12 md:py-32">
-      <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-2">
-        {/* Left — live payload preview */}
-        <div>
-          <SectionLabel>// Live Dispatch Node</SectionLabel>
-          <h2 className="font-display text-chrome-gradient mt-6 text-[clamp(2rem,4.5vw,3.25rem)] uppercase">
+    <button
+      type="button"
+      onClick={onCopy}
+      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 px-5 py-3 font-mono text-xs text-mist transition hover:border-white/35 hover:text-chrome"
+    >
+      {copied ? "✓ Copied" : "Copy Email"}
+    </button>
+  );
+}
+
+export function Contact() {
+  return (
+    <section id="contact" className="violet-wash relative overflow-hidden px-6 py-24 md:px-12 md:py-32">
+      {/* Faint blueprint grid, faded toward the edges */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+          maskImage: "radial-gradient(ellipse 60% 55% at 50% 25%, black, transparent)",
+          WebkitMaskImage: "radial-gradient(ellipse 60% 55% at 50% 25%, black, transparent)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-[900px]">
+        <Reveal className="text-center">
+          <div className="inline-flex items-center gap-3">
+            <SectionLabel>// Live Dispatch Node</SectionLabel>
+            <span className="label-mono inline-flex items-center gap-2 rounded-full border border-signal/30 bg-signal/[0.06] px-4 py-1.5 text-signal">
+              <span className="h-1 w-1 animate-pulse rounded-full bg-signal" />
+              {profile.status}
+            </span>
+          </div>
+
+          <h2 className="font-display text-chrome-gradient mx-auto mt-6 max-w-2xl text-[clamp(2rem,4.5vw,3.25rem)] uppercase">
             Let&apos;s Build Something Exceptional.
           </h2>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-mist">
-            Fill out the transmission form or preview your live payload stream
-            directly below.
+          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-mist">
+            Reach out through any of the channels below. I read every message
+            and reply within 24 hours.
           </p>
+        </Reveal>
 
-          <div onMouseMove={handleSpotlight} className="panel spotlight mt-9 rounded-2xl p-5">
-            <p className="label-mono mb-4">// payload_preview.json</p>
-            <pre className="overflow-x-auto font-mono text-[12.5px] leading-relaxed">
-              <code>
-                <span className="text-mist">{"{"}</span>
-                {"\n  "}
-                <span className="text-violet">"sender"</span>
-                <span className="text-mist">: </span>
-                <span className="text-chrome">
-                  "{awaiting(`${values.firstName ?? ""} ${values.lastName ?? ""}`.trim(), "Name")}"
-                </span>
-                <span className="text-mist">,</span>
-                {"\n  "}
-                <span className="text-violet">"email"</span>
-                <span className="text-mist">: </span>
-                <span className="text-chrome">
-                  "{awaiting(values.email ?? "", "Email")}"
-                </span>
-                <span className="text-mist">,</span>
-                {"\n  "}
-                <span className="text-violet">"message"</span>
-                <span className="text-mist">: </span>
-                <span className="text-chrome">
-                  "{awaiting(values.message ?? "", "Message")}"
-                </span>
-                <span className="text-mist">,</span>
-                {"\n  "}
-                <span className="text-violet">"consent"</span>
-                <span className="text-mist">: </span>
-                <span className={values.consent ? "text-signal" : "text-mist"}>
-                  {values.consent ? "true" : "false"}
-                </span>
-                {"\n"}
-                <span className="text-mist">{"}"}</span>
-              </code>
-            </pre>
-          </div>
-        </div>
-
-        {/* Right — form */}
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          onMouseMove={handleSpotlight}
-          className="panel spotlight rounded-2xl p-6 md:p-8"
-          noValidate
-        >
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label htmlFor="firstName" className="label-mono mb-2 block">First Name</label>
-              <input id="firstName" {...register("firstName")} className={field} placeholder="First name" />
-              {errors.firstName && <p className="mt-1.5 text-xs text-red-400">{errors.firstName.message}</p>}
-            </div>
-            <div>
-              <label htmlFor="lastName" className="label-mono mb-2 block">Last Name</label>
-              <input id="lastName" {...register("lastName")} className={field} placeholder="Last name" />
-              {errors.lastName && <p className="mt-1.5 text-xs text-red-400">{errors.lastName.message}</p>}
-            </div>
-          </div>
-
-          <div className="mt-4">
-            <label htmlFor="email" className="label-mono mb-2 block">Email Address</label>
-            <input id="email" type="email" {...register("email")} className={field} placeholder="you@company.com" />
-            {errors.email && <p className="mt-1.5 text-xs text-red-400">{errors.email.message}</p>}
-          </div>
-
-          <div className="mt-4">
-            <label htmlFor="message" className="label-mono mb-2 block">Message</label>
-            <textarea id="message" rows={5} {...register("message")} className={`${field} resize-none`} placeholder="Type your message here…" />
-            {errors.message && <p className="mt-1.5 text-xs text-red-400">{errors.message.message}</p>}
-          </div>
-
-          {/* Honeypot */}
-          <input {...register("website")} tabIndex={-1} autoComplete="off" aria-hidden className="absolute h-0 w-0 opacity-0" />
-
-          <label className="mt-6 flex items-start gap-3 text-xs leading-relaxed text-mist">
-            <input type="checkbox" {...register("consent")} className="mt-0.5 h-4 w-4 shrink-0 accent-violet" />
-            I give permission to contact me at this email address.
-          </label>
-          {errors.consent && <p className="mt-1.5 text-xs text-red-400">{errors.consent.message}</p>}
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="shine mt-7 w-full rounded-full bg-chrome px-6 py-3.5 text-sm font-semibold text-void transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_40px_-12px_rgb(255_255_255/0.35)] disabled:translate-y-0 disabled:opacity-55"
+        {/* Primary channel — email */}
+        <Reveal delay={100}>
+          <div
+            onMouseMove={handleSpotlight}
+            className="panel spotlight lift mt-12 rounded-3xl p-8 sm:p-10"
           >
-            {isSubmitting ? "Transmitting…" : "Send Transmission"}
-          </button>
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-5">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-violet/30 bg-violet/10 text-violet">
+                  {mailIcon}
+                </span>
+                <div className="min-w-0">
+                  <p className="label-mono">// Primary Channel</p>
+                  <p className="mt-2 truncate font-mono text-base text-chrome sm:text-lg">
+                    {profile.email}
+                  </p>
+                </div>
+              </div>
 
-          {isSubmitSuccessful && (
-            <p className="mt-4 text-center font-mono text-xs text-signal" role="status">
-              ✓ Transmission received. I&apos;ll reply shortly.
-            </p>
-          )}
-        </form>
+              <div className="flex items-center gap-3">
+                <CopyEmailButton email={profile.email} />
+                <a
+                  href={`mailto:${profile.email}`}
+                  className="shine inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-chrome px-6 py-3 text-sm font-semibold text-void transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_40px_-12px_rgb(255_255_255/0.35)]"
+                >
+                  Send Email {arrowIcon}
+                </a>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Secondary channels — socials */}
+        <Reveal delay={180} className="mt-4 grid gap-4 sm:grid-cols-2">
+          {profile.socials.map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
+              onMouseMove={handleSpotlight}
+              className="panel spotlight lift group flex items-center justify-between gap-4 rounded-2xl p-6 transition-colors hover:border-violet/40"
+            >
+              <div className="min-w-0">
+                <p className="text-sm font-semibold">{s.label}</p>
+                <p className="mt-1 truncate font-mono text-[11px] text-mist">
+                  {s.href.replace(/^https?:\/\/(www\.)?/, "")}
+                </p>
+              </div>
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 text-mist transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-violet/50 group-hover:text-chrome">
+                {arrowIcon}
+              </span>
+            </a>
+          ))}
+        </Reveal>
       </div>
     </section>
   );

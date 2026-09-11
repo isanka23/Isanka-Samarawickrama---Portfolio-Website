@@ -1,7 +1,32 @@
 import { profile } from "@/data/profile";
+import { projects } from "@/data/projects";
+import { stackRowOne, stackRowTwo } from "@/data/stack";
 import { SectionLabel } from "@/components/SectionLabel";
 import { Reveal } from "@/components/Reveal";
+import { Stat } from "@/components/Stat";
 import { handleSpotlight } from "@/hooks/useSpotlight";
+
+/** Floored from the industrial-placement start date, so it self-updates. */
+const EXPERIENCE_START = new Date(2024, 4, 1);
+const yearsExperience = Math.max(
+  1,
+  Math.floor((Date.now() - EXPERIENCE_START.getTime()) / (1000 * 60 * 60 * 24 * 365.25)),
+);
+
+const stats = [
+  { value: projects.length, suffix: "+", label: "// Projects Shipped" },
+  {
+    value: projects.filter((p) => p.playStore || p.appStore).length,
+    suffix: "",
+    label: "// Live Store Apps",
+  },
+  { value: yearsExperience, suffix: "+", label: "// Years Experience" },
+  {
+    value: new Set([...stackRowOne, ...stackRowTwo]).size,
+    suffix: "+",
+    label: "// Technologies",
+  },
+];
 
 export function About() {
   return (
@@ -58,6 +83,15 @@ export function About() {
           </dl>
         </Reveal>
       </div>
+
+      <Reveal
+        delay={200}
+        className="mx-auto mt-16 grid max-w-[1200px] grid-cols-2 gap-8 border-t border-white/8 pt-10 sm:grid-cols-4"
+      >
+        {stats.map((s) => (
+          <Stat key={s.label} value={s.value} suffix={s.suffix} label={s.label} />
+        ))}
+      </Reveal>
     </section>
   );
 }

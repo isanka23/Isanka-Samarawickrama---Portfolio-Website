@@ -8,7 +8,9 @@ import { CursorGlow } from "@/components/CursorGlow";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/sections/Hero";
 import { About } from "@/sections/About";
+import { Philosophy } from "@/sections/Philosophy";
 import { Expertise } from "@/sections/Expertise";
+import { Pipeline } from "@/sections/Pipeline";
 import { Skills } from "@/sections/Skills";
 import { Timeline } from "@/sections/Timeline";
 import { Projects } from "@/sections/Projects";
@@ -54,7 +56,9 @@ export default function App() {
       <main aria-busy={!booted}>
         <Hero />
         <About />
+        <Philosophy />
         <Expertise />
+        <Pipeline />
         <Skills />
         <Timeline />
         <Projects />

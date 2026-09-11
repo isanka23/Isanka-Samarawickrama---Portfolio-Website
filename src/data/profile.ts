@@ -16,7 +16,7 @@ export const profile = {
 
   company: "Azbow (pvt) Ltd",
 
-  bio: "Junior Software Engineer and Software Engineering undergraduate, building across the whole product surface — REST APIs and data layers on the backend, responsive interfaces on the web, and cross-platform mobile apps in Flutter. I care about shipping software that holds up: clean architecture, predictable performance, and interfaces people can actually use.",
+  bio: "Junior Software Engineer and BSc (Hons) Software Engineering graduate, building across the whole product surface — REST APIs and data layers on the backend, responsive interfaces on the web, and cross-platform mobile apps in Flutter. I care about shipping software that holds up: clean architecture, predictable performance, and interfaces people can actually use.",
 
   socials: [
     { label: "GitHub", href: "https://github.com/isanka23" },

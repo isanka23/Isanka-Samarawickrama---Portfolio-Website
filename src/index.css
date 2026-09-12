@@ -206,7 +206,10 @@
     transition: opacity 0.5s var(--ease-out-expo);
     pointer-events: none;
   }
-  .spotlight:focus-within::before {
+  /* focus-visible, not focus-within: a mouse click leaves the link focused,
+     which would otherwise leave the card lit up long after the click. */
+  .spotlight:focus-visible::before,
+  .spotlight:has(:focus-visible)::before {
     opacity: 1;
   }
 
@@ -217,38 +220,34 @@
       box-shadow 0.45s var(--ease-out-expo),
       border-color 0.3s ease;
   }
-  /* Pointer-driven effects are gated on a real hover-capable device, so a tap
-     can never leave a card stuck in its hover state on a phone. */
-  @media (hover: hover) {
-    .spotlight:hover::before {
-      opacity: 1;
-    }
+  .spotlight:hover::before {
+    opacity: 1;
+  }
 
-    .lift:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 28px 70px -30px rgb(109 92 231 / 0.45);
-    }
+  .lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 70px -30px rgb(109 92 231 / 0.45);
+  }
 
-    .shine:hover::after {
-      left: 130%;
-    }
+  .shine:hover::after {
+    left: 130%;
+  }
 
-    .underline-grow:hover::after {
-      transform: scaleX(1);
-    }
+  .underline-grow:hover::after {
+    transform: scaleX(1);
+  }
 
-    .glass:hover {
-      border-color: rgb(255 255 255 / 0.3);
-      box-shadow:
-        inset 0 1px 0 0 rgb(255 255 255 / 0.45),
-        0 16px 38px -12px rgb(109 92 231 / 0.5);
-    }
+  .glass:hover {
+    border-color: rgb(255 255 255 / 0.3);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.45),
+      0 16px 38px -12px rgb(109 92 231 / 0.5);
+  }
 
-    .glass-bright:hover {
-      box-shadow:
-        inset 0 1px 0 0 rgb(255 255 255 / 1),
-        0 18px 42px -12px rgb(255 255 255 / 0.55);
-    }
+  .glass-bright:hover {
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 1),
+      0 18px 42px -12px rgb(255 255 255 / 0.55);
   }
 
   /* Liquid glass: frosted fill, specular top rim, soft cast shadow */

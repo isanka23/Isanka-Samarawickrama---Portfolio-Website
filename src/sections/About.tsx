@@ -33,18 +33,15 @@ export function About() {
     <section id="about" className="violet-wash relative px-6 py-28 md:px-12 md:py-40">
       <div className="mx-auto grid max-w-[1200px] items-center gap-14 md:grid-cols-2">
         <Reveal>
-          {/* Placeholder portrait — swap for a real image. */}
           <div
             onMouseMove={handleSpotlight}
             className="panel spotlight lift group aspect-[4/5] overflow-hidden rounded-3xl"
           >
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.07] to-transparent transition-transform duration-500 group-hover:scale-105">
-              <span className="label-mono text-center leading-relaxed">
-                Portrait
-                <br />
-                placeholder
-              </span>
-            </div>
+            <img
+              src="/portrait.png"
+              alt={profile.fullName}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
           </div>
         </Reveal>
 

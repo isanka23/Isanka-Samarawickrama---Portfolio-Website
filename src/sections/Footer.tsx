@@ -41,7 +41,7 @@ export function Footer() {
           <p className="font-mono text-[11px] text-mist">
             © {profile.year} {profile.legalName} — Built with React &amp; Tailwind
           </p>
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {profile.socials.map((s) => (
               <a key={s.label} href={s.href} target="_blank" rel="noreferrer"
                  className="font-mono text-[11px] text-mist transition-colors hover:text-chrome">

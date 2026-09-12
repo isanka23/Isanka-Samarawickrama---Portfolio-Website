@@ -34,7 +34,7 @@ function CopyEmailButton({ email }: { email: string }) {
     <button
       type="button"
       onClick={onCopy}
-      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 px-5 py-3 font-mono text-xs text-mist transition hover:border-white/35 hover:text-chrome"
+      className="glass inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-mono text-xs text-mist hover:-translate-y-0.5 hover:text-chrome"
     >
       {copied ? "✓ Copied" : "Copy Email"}
     </button>
@@ -99,7 +99,7 @@ export function Contact() {
                 <CopyEmailButton email={profile.email} />
                 <a
                   href={`mailto:${profile.email}`}
-                  className="shine inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-chrome px-6 py-3 text-sm font-semibold text-void transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_40px_-12px_rgb(255_255_255/0.35)]"
+                  className="shine glass-bright inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-semibold text-void hover:-translate-y-0.5"
                 >
                   Send Email {arrowIcon}
                 </a>
@@ -117,7 +117,7 @@ export function Contact() {
               target="_blank"
               rel="noreferrer"
               onMouseMove={handleSpotlight}
-              className="panel spotlight lift group flex items-center justify-between gap-4 rounded-2xl p-6 transition-colors hover:border-violet/40"
+              className="panel spotlight lift group flex min-w-0 items-center justify-between gap-4 rounded-2xl p-6 transition-colors hover:border-violet/40"
             >
               <div className="min-w-0">
                 <p className="text-sm font-semibold">{s.label}</p>

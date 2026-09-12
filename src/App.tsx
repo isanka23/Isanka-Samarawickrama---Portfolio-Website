@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import gsap from "gsap";
 import Lenis from "lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -17,19 +17,32 @@ import { Projects } from "@/sections/Projects";
 import { Certifications } from "@/sections/Certifications";
 import { Contact } from "@/sections/Contact";
 import { Footer } from "@/sections/Footer";
-import { useFrameSequence, HERO_FRAME_COUNT } from "@/hooks/useFrameSequence";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export default function App() {
-  const { loaded } = useFrameSequence();
   const reduced = useReducedMotion();
-  const [booted, setBooted] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [revealed, setRevealed] = useState(false);
 
-  const progress = Math.round((loaded / HERO_FRAME_COUNT) * 100);
+  const onReveal = useCallback(() => setRevealed(true), []);
+  const progress = ready ? 100 : 0;
 
+  // Gate the boot bar on the assets the first screen actually needs.
   useEffect(() => {
-    if (progress >= 100) setBooted(true);
-  }, [progress]);
+    const img = new Image();
+    img.src = "/portrait.png";
+    const decoded = img.decode().catch(() => undefined);
+    const fonts = document.fonts?.ready ?? Promise.resolve();
+
+    let cancelled = false;
+    Promise.all([decoded, fonts]).then(() => {
+      if (!cancelled) setReady(true);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Smooth scroll, driving ScrollTrigger off the same RAF loop.
   useEffect(() => {
@@ -50,11 +63,11 @@ export default function App() {
 
   return (
     <>
-      <BootLoader progress={progress} />
+      <BootLoader progress={progress} onReveal={onReveal} />
       <CursorGlow />
       <Nav />
-      <main aria-busy={!booted}>
-        <Hero />
+      <main aria-busy={!revealed}>
+        <Hero ready={revealed} />
         <About />
         <Philosophy />
         <Expertise />

@@ -84,6 +84,92 @@
     backdrop-filter: blur(12px);
   }
 
+  /* Drifting violet blobs behind the hero */
+  .aurora {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .aurora::before,
+  .aurora::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    will-change: transform;
+  }
+  .aurora::before {
+    width: 44vw;
+    height: 44vw;
+    min-width: 320px;
+    min-height: 320px;
+    left: -8vw;
+    top: -14vw;
+    background: rgb(109 92 231 / 0.3);
+    animation: aurora-drift-a 24s ease-in-out infinite alternate;
+  }
+  .aurora::after {
+    width: 34vw;
+    height: 34vw;
+    min-width: 260px;
+    min-height: 260px;
+    left: 24vw;
+    bottom: -20vw;
+    background: rgb(42 33 80 / 0.6);
+    animation: aurora-drift-b 31s ease-in-out infinite alternate;
+  }
+
+  /* Hairline-outlined display type, used as a background layer */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(232 232 239 / 0.2);
+  }
+
+  /* Seamless ticker: the track holds the same content twice */
+  .marquee {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+  .marquee > * {
+    white-space: nowrap;
+    padding-right: 0.35em;
+  }
+  .marquee-l {
+    animation: marquee-l 42s linear infinite;
+  }
+  .marquee-r {
+    animation: marquee-r 52s linear infinite;
+  }
+
+  /* CRT scanlines laid over the hero portrait plate */
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgb(8 8 10 / 0.4) 0px,
+      rgb(8 8 10 / 0.4) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  }
+
+  /* Violet bloom sitting behind the hero portrait */
+  .halo::before {
+    content: "";
+    position: absolute;
+    inset: -14%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgb(109 92 231 / 0.45),
+      rgb(109 92 231 / 0.1) 55%,
+      transparent 72%
+    );
+    filter: blur(50px);
+    animation: halo-breathe 9s ease-in-out infinite alternate;
+  }
+
   /* Ambient violet wash behind sections */
   .violet-wash {
     background:
@@ -120,7 +206,6 @@
     transition: opacity 0.5s var(--ease-out-expo);
     pointer-events: none;
   }
-  .spotlight:hover::before,
   .spotlight:focus-within::before {
     opacity: 1;
   }
@@ -132,9 +217,81 @@
       box-shadow 0.45s var(--ease-out-expo),
       border-color 0.3s ease;
   }
-  .lift:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 28px 70px -30px rgb(109 92 231 / 0.45);
+  /* Pointer-driven effects are gated on a real hover-capable device, so a tap
+     can never leave a card stuck in its hover state on a phone. */
+  @media (hover: hover) {
+    .spotlight:hover::before {
+      opacity: 1;
+    }
+
+    .lift:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 70px -30px rgb(109 92 231 / 0.45);
+    }
+
+    .shine:hover::after {
+      left: 130%;
+    }
+
+    .underline-grow:hover::after {
+      transform: scaleX(1);
+    }
+
+    .glass:hover {
+      border-color: rgb(255 255 255 / 0.3);
+      box-shadow:
+        inset 0 1px 0 0 rgb(255 255 255 / 0.45),
+        0 16px 38px -12px rgb(109 92 231 / 0.5);
+    }
+
+    .glass-bright:hover {
+      box-shadow:
+        inset 0 1px 0 0 rgb(255 255 255 / 1),
+        0 18px 42px -12px rgb(255 255 255 / 0.55);
+    }
+  }
+
+  /* Liquid glass: frosted fill, specular top rim, soft cast shadow */
+  .glass {
+    background: linear-gradient(
+      145deg,
+      rgb(255 255 255 / 0.14),
+      rgb(255 255 255 / 0.045) 46%,
+      rgb(255 255 255 / 0.1)
+    );
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.34),
+      inset 0 -1px 1px 0 rgb(255 255 255 / 0.07),
+      0 10px 28px -10px rgb(0 0 0 / 0.65);
+    transition:
+      background 0.4s var(--ease-out-expo),
+      border-color 0.3s ease,
+      box-shadow 0.4s var(--ease-out-expo),
+      transform 0.4s var(--ease-out-expo);
+  }
+
+  /* Prominent variant — light-filled glass for primary actions */
+  .glass-bright {
+    background: linear-gradient(
+      145deg,
+      rgb(255 255 255 / 0.95),
+      rgb(232 232 239 / 0.8) 55%,
+      rgb(255 255 255 / 0.9)
+    );
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgb(255 255 255 / 0.7);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.9),
+      inset 0 -2px 3px 0 rgb(109 92 231 / 0.12),
+      0 12px 30px -12px rgb(255 255 255 / 0.4);
+    transition:
+      background 0.4s var(--ease-out-expo),
+      box-shadow 0.4s var(--ease-out-expo),
+      transform 0.4s var(--ease-out-expo);
   }
 
   /* Diagonal shine sweep for primary buttons */
@@ -158,10 +315,6 @@
     transition: left 0.75s var(--ease-out-expo);
     pointer-events: none;
   }
-  .shine:hover::after {
-    left: 130%;
-  }
-
   /* Animated underline that grows from center */
   .underline-grow {
     position: relative;
@@ -178,10 +331,30 @@
     transform-origin: center;
     transition: transform 0.35s var(--ease-out-expo);
   }
-  .underline-grow:hover::after,
   .underline-grow[data-active="true"]::after {
     transform: scaleX(1);
   }
+}
+
+@keyframes marquee-l {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes marquee-r {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes halo-breathe {
+  to { transform: scale(1.07); opacity: 0.85; }
+}
+
+@keyframes aurora-drift-a {
+  to { transform: translate3d(12vw, 9vh, 0) scale(1.18); }
+}
+
+@keyframes aurora-drift-b {
+  to { transform: translate3d(-11vw, -11vh, 0) scale(1.24); }
 }
 
 @media (prefers-reduced-motion: reduce) {

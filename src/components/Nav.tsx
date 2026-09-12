@@ -37,12 +37,12 @@ export function Nav() {
   }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid ? "border-b border-white/8 bg-void/80 backdrop-blur-xl" : ""
-      }`}
-    >
-      <nav className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-4 md:px-12">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6 md:pt-5">
+      <nav
+        className={`panel mx-auto flex max-w-[1180px] items-center justify-between rounded-full px-5 py-3 transition-all duration-500 md:px-7 ${
+          solid ? "bg-void/70 shadow-[0_18px_50px_-24px_rgb(0_0_0/0.9)]" : ""
+        }`}
+      >
         <a href="#home" className="text-lg font-bold tracking-tight">
           {profile.firstName}
           <span className="text-violet">.</span>
@@ -67,7 +67,7 @@ export function Nav() {
 
         <a
           href="#contact"
-          className="shine rounded-full border border-white/15 px-5 py-2 text-xs font-semibold transition hover:-translate-y-0.5 hover:border-violet/50 hover:bg-white/5"
+          className="shine glass rounded-full px-5 py-2 text-xs font-semibold hover:-translate-y-0.5"
         >
           Hire Me
         </a>

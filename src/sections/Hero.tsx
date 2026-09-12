@@ -1,90 +1,85 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { heroPhases, profile } from "@/data/profile";
-import { useFrameSequence, HERO_FRAME_COUNT } from "@/hooks/useFrameSequence";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { LocalClock } from "@/components/LocalClock";
 
-gsap.registerPlugin(ScrollTrigger);
+const PHASE_MS = 5000;
 
-export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { images, ready } = useFrameSequence();
+const TICKER_TOP = "Software Engineer ✦ Backend ✦ Web ✦ Mobile ✦ ";
+const TICKER_BOTTOM = "Flutter ✦ React ✦ Node.js ✦ REST APIs ✦ ";
+
+/** One ticker row. The content is doubled so the -50% loop is seamless. */
+function Ticker({ text, direction }: { text: string; direction: "l" | "r" }) {
+  return (
+    <div className={`marquee marquee-${direction}`}>
+      <span className="text-outline font-display text-[clamp(4rem,12vw,13rem)] uppercase">
+        {text.repeat(3)}
+      </span>
+      <span
+        aria-hidden="true"
+        className="text-outline font-display text-[clamp(4rem,12vw,13rem)] uppercase"
+      >
+        {text.repeat(3)}
+      </span>
+    </div>
+  );
+}
+
+export function Hero({ ready = true }: { ready?: boolean }) {
   const reduced = useReducedMotion();
   const [phase, setPhase] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const copyRef = useRef<HTMLDivElement>(null);
 
-  /** Draws one frame with cover-fit math so it never distorts. */
-  const draw = (index: number) => {
-    const canvas = canvasRef.current;
-    const img = images[index];
-    if (!canvas || !img?.complete || !img.naturalWidth) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const cw = canvas.clientWidth;
-    const ch = canvas.clientHeight;
-
-    if (canvas.width !== cw * dpr || canvas.height !== ch * dpr) {
-      canvas.width = cw * dpr;
-      canvas.height = ch * dpr;
-    }
-
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, cw, ch);
-
-    const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-    const w = img.naturalWidth * scale;
-    const h = img.naturalHeight * scale;
-    ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
-  };
-
+  // Timeout rather than interval, so a manual pick restarts the dwell.
   useEffect(() => {
-    if (!ready) return;
+    if (reduced || !ready) return;
+    const id = setTimeout(
+      () => setPhase((p) => (p + 1) % heroPhases.length),
+      PHASE_MS,
+    );
+    return () => clearTimeout(id);
+  }, [phase, reduced, ready]);
 
-    // Reduced motion / small screens: a single static frame, no pin.
-    if (reduced) {
-      draw(0);
-      return;
-    }
+  useLayoutEffect(() => {
+    if (reduced || !ready) return;
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        "[data-mask-line]",
+        { yPercent: 115 },
+        { yPercent: 0, duration: 0.9, ease: "expo.out", stagger: 0.07 },
+      );
+      gsap.fromTo(
+        "[data-fade-line]",
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", delay: 0.12 },
+      );
+    }, copyRef);
+    return () => ctx.revert();
+  }, [phase, reduced, ready]);
 
-    const state = { frame: 0 };
-
-    const trigger = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top top",
-      end: "+=300%",
-      pin: true,
-      scrub: 0.6,
-      onUpdate: (self) => {
-        const target = Math.min(
-          HERO_FRAME_COUNT - 1,
-          Math.round(self.progress * (HERO_FRAME_COUNT - 1)),
-        );
-        if (target !== state.frame) {
-          state.frame = target;
-          draw(target);
-        }
-        setPhase(
-          Math.min(
-            heroPhases.length - 1,
-            Math.floor(self.progress * heroPhases.length),
-          ),
-        );
-      },
-    });
-
-    draw(0);
-    const onResize = () => draw(state.frame);
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      trigger.kill();
-      window.removeEventListener("resize", onResize);
-    };
-  }, [ready, reduced, images]);
+  // One-shot entrance for the furniture and portrait as the curtain lifts.
+  useLayoutEffect(() => {
+    if (reduced || !ready) return;
+    const ctx = gsap.context(() => {
+      gsap.from("[data-hero-disc]", {
+        scale: 0.88,
+        opacity: 0,
+        duration: 1.4,
+        ease: "expo.out",
+      });
+      gsap.from("[data-hero-rise]", {
+        y: 24,
+        opacity: 0,
+        duration: 0.9,
+        ease: "expo.out",
+        stagger: 0.08,
+        delay: 0.15,
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, [reduced, ready]);
 
   const active = heroPhases[phase];
 
@@ -92,72 +87,132 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative h-screen w-full overflow-hidden bg-void grain"
+      className="relative min-h-screen w-full overflow-hidden bg-void grain"
     >
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      />
+      <div className="aurora" />
 
-      {/* Vignette keeps the headline readable over any frame */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(90deg, rgb(8 8 10 / 0.92) 0%, rgb(8 8 10 / 0.35) 32%, transparent 50%, rgb(8 8 10 / 0.35) 68%, rgb(8 8 10 / 0.92) 100%)",
-        }}
-      />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-void to-transparent" />
+      {/* Kinetic outline type, framing the composition top and bottom */}
+      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between overflow-hidden py-[4vh]">
+        <Ticker text={TICKER_TOP} direction="l" />
+        <Ticker text={TICKER_BOTTOM} direction="r" />
+      </div>
 
-      <div className="relative z-10 mx-auto flex h-full max-w-[1500px] flex-col justify-center px-6 md:px-12">
-        <div className="grid items-center gap-10 md:grid-cols-[1fr_auto_1fr]">
-          {/* Left — headline */}
-          <div>
-            <p className="label-mono mb-5">
-              Hi, I&apos;m{" "}
-              <span className="text-chrome underline underline-offset-4">
-                {profile.firstName}
-              </span>
-            </p>
-            <h1 className="font-display text-chrome-gradient text-[clamp(3rem,8vw,7rem)] uppercase">
-              {active.headline.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </h1>
+      {/* Keeps the copy readable where it crosses the portrait */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-void via-void/75 to-transparent" />
+
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1500px] flex-col px-6 pt-28 pb-8 md:px-12 md:pt-24">
+        {/* At lg the disc joins the copy as a flex row, so items-start pins its
+            top edge to the status pill's. Below that it floats behind. */}
+        <div className="flex flex-1 flex-col justify-end md:justify-center">
+        <div className="md:flex md:items-start md:justify-between md:gap-8 lg:gap-10">
+        <div ref={copyRef} className="max-w-3xl md:min-w-0 md:flex-1">
+          <div
+            data-hero-rise
+            className="panel inline-flex items-center gap-2.5 rounded-full px-4 py-2"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-signal" />
+            </span>
+            <span className="label-mono text-chrome">{profile.status}</span>
           </div>
 
-          <div aria-hidden className="hidden md:block md:w-[38vw]" />
+          <p className="label-mono mt-7 mb-4">
+            Hi, I&apos;m{" "}
+            <span className="text-chrome underline underline-offset-4">
+              {profile.firstName}
+            </span>
+          </p>
 
-          {/* Right — rotating caption */}
-          <div className="max-w-xs md:justify-self-end md:text-right lg:max-w-sm">
+          <h1 className="font-display text-chrome-gradient text-[clamp(2.5rem,7.5vw,6.5rem)] uppercase">
+            {active.headline.map((line) => (
+              <span
+                key={line}
+                className="block overflow-hidden pb-[0.09em] -mb-[0.09em]"
+              >
+                {/* nowrap so a phrase like "Cross-Platform" never splits */}
+                <span data-mask-line className="block whitespace-nowrap">
+                  {line}
+                </span>
+              </span>
+            ))}
+          </h1>
+
+          <div data-fade-line className="mt-8 max-w-md">
             <p className="label-mono mb-3">{active.label}</p>
             <p className="text-sm leading-relaxed text-mist">
               {active.caption}
             </p>
           </div>
-        </div>
 
-        <div className="mt-14 flex items-center justify-between gap-4">
-          <p className="label-mono hidden animate-pulse sm:block">
-            ↓ Scroll to scrub timeline
-          </p>
-          <div className="flex gap-3">
+          <div className="mt-8 flex gap-2" role="tablist" aria-label="Hero focus">
+            {heroPhases.map((p, i) => (
+              <button
+                key={p.label}
+                type="button"
+                role="tab"
+                aria-selected={i === phase}
+                aria-label={p.headline.join(" ")}
+                onClick={() => setPhase(i)}
+                className={`h-1 rounded-full transition-all duration-500 ${
+                  i === phase ? "w-10 bg-violet" : "w-5 bg-white/25 hover:bg-white/45"
+                }`}
+              />
+            ))}
+          </div>
+
+          <div data-hero-rise className="mt-10 flex flex-wrap gap-3">
             <a
               href="#projects"
-              className="shine rounded-full bg-chrome px-7 py-3 text-sm font-semibold text-void transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_16px_40px_-12px_rgb(255_255_255/0.35)]"
+              className="shine glass-bright rounded-full px-7 py-3 text-sm font-semibold text-void hover:-translate-y-0.5"
             >
               View My Work
             </a>
             <a
               href="#contact"
-              className="shine rounded-full border border-white/15 bg-void/70 px-7 py-3 text-sm font-semibold text-chrome backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-violet/50"
+              className="shine glass rounded-full px-7 py-3 text-sm font-semibold text-chrome hover:-translate-y-0.5"
             >
               Contact Me
             </a>
           </div>
+        </div>
+
+        {/* Portrait disc: multiply drops the photo's white studio backdrop into
+            the violet, leaving a duotone cut-out inside a bloom. */}
+        <div
+          data-hero-disc
+          className="halo pointer-events-none absolute top-[9%] right-[3%] aspect-square w-[58%] max-w-[560px] md:static md:-mr-6 md:w-[34%] md:shrink-0 lg:-mr-10 lg:w-[36%]"
+        >
+          <div className="relative h-full w-full overflow-hidden rounded-full bg-[#b3a8f7]">
+            <img
+              src="/portrait.png"
+              alt=""
+              aria-hidden="true"
+              className="h-full w-full object-cover object-[50%_10%] brightness-[1.06] contrast-[1.04] mix-blend-multiply"
+            />
+          </div>
+        </div>
+        </div>
+        </div>
+
+        <div
+          data-hero-rise
+          className="mt-10 flex items-center justify-between gap-4"
+        >
+          <div className="glass hidden items-center gap-5 rounded-full px-5 py-2.5 md:inline-flex">
+            {profile.socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                className="label-mono transition-colors hover:text-chrome"
+              >
+                {s.label}
+              </a>
+            ))}
+          </div>
+          <LocalClock />
         </div>
       </div>
     </section>

@@ -185,7 +185,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
         >
           <div className="relative h-full w-full overflow-hidden rounded-full bg-[#b3a8f7]">
             <img
-              src="/portrait.png"
+              src="/portrait.webp"
               alt=""
               aria-hidden="true"
               className="h-full w-full object-cover object-[50%_10%] brightness-[1.06] contrast-[1.04] mix-blend-multiply"

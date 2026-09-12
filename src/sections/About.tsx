@@ -38,7 +38,7 @@ export function About() {
             className="panel spotlight lift group aspect-[4/5] overflow-hidden rounded-3xl"
           >
             <img
-              src="/portrait.png"
+              src="/portrait.webp"
               alt={profile.fullName}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />

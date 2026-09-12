@@ -43,7 +43,7 @@ export default function App() {
   // Gate the boot bar on the assets the first screen actually needs.
   useEffect(() => {
     const img = new Image();
-    img.src = "/portrait.png";
+    img.src = "/portrait.webp";
     const decoded = img.decode().catch(() => undefined);
     const fonts = document.fonts?.ready ?? Promise.resolve();
 

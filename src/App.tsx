@@ -27,6 +27,19 @@ export default function App() {
   const onReveal = useCallback(() => setRevealed(true), []);
   const progress = ready ? 100 : 0;
 
+  // A reload should always land on the hero: stop the browser restoring the
+  // previous scroll position, and drop any #section left in the URL by the nav.
+  // Runs before Lenis starts so it initialises at the top.
+  useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+
+    window.scrollTo(0, 0);
+  }, []);
+
   // Gate the boot bar on the assets the first screen actually needs.
   useEffect(() => {
     const img = new Image();

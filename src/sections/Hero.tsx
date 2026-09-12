@@ -117,7 +117,7 @@ export function Hero({ ready = true }: { ready?: boolean }) {
             <span className="label-mono text-chrome">{profile.status}</span>
           </div>
 
-          <p className="label-mono mt-7 mb-4">
+          <p className="label-mono mt-7 mb-4 text-chrome/85">
             Hi, I&apos;m{" "}
             <span className="text-chrome underline underline-offset-4">
               {profile.firstName}
@@ -139,8 +139,8 @@ export function Hero({ ready = true }: { ready?: boolean }) {
           </h1>
 
           <div data-fade-line className="mt-8 max-w-md">
-            <p className="label-mono mb-3">{active.label}</p>
-            <p className="text-sm leading-relaxed text-mist">
+            <p className="label-mono mb-3 text-chrome/90">{active.label}</p>
+            <p className="text-sm leading-relaxed text-chrome/80 [text-shadow:0_2px_16px_rgb(8_8_10/0.8)]">
               {active.caption}
             </p>
           </div>

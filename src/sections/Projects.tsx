@@ -136,7 +136,7 @@ export function Projects() {
                     target="_blank"
                     rel="noreferrer"
                     tabIndex={i >= projects.length ? -1 : undefined}
-                    className="inline-flex items-center gap-2 font-mono text-xs text-chrome transition-colors hover:text-violet"
+                    className="inline-flex items-center gap-2 py-1.5 font-mono text-xs text-chrome transition-colors hover:text-violet"
                   >
                     CODE <span aria-hidden>→</span>
                   </a>
@@ -147,7 +147,7 @@ export function Projects() {
                     target="_blank"
                     rel="noreferrer"
                     tabIndex={i >= projects.length ? -1 : undefined}
-                    className="inline-flex items-center gap-2 font-mono text-xs text-signal transition-colors hover:text-chrome"
+                    className="inline-flex items-center gap-2 py-1.5 font-mono text-xs text-signal transition-colors hover:text-chrome"
                   >
                     LIVE <span aria-hidden>↗</span>
                   </a>
@@ -158,7 +158,7 @@ export function Projects() {
                     target="_blank"
                     rel="noreferrer"
                     tabIndex={i >= projects.length ? -1 : undefined}
-                    className="inline-flex items-center gap-2 font-mono text-xs text-signal transition-colors hover:text-chrome"
+                    className="inline-flex items-center gap-2 py-1.5 font-mono text-xs text-signal transition-colors hover:text-chrome"
                   >
                     PLAY STORE <span aria-hidden>↗</span>
                   </a>
@@ -169,7 +169,7 @@ export function Projects() {
                     target="_blank"
                     rel="noreferrer"
                     tabIndex={i >= projects.length ? -1 : undefined}
-                    className="inline-flex items-center gap-2 font-mono text-xs text-signal transition-colors hover:text-chrome"
+                    className="inline-flex items-center gap-2 py-1.5 font-mono text-xs text-signal transition-colors hover:text-chrome"
                   >
                     APP STORE <span aria-hidden>↗</span>
                   </a>

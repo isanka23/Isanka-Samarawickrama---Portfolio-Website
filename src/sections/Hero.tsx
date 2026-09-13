@@ -101,10 +101,12 @@ export function Hero({ ready = true }: { ready?: boolean }) {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-void via-void/75 to-transparent" />
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-[1500px] flex-col px-6 pt-28 pb-8 md:px-12 md:pt-24">
-        {/* At lg the disc joins the copy as a flex row, so items-start pins its
-            top edge to the status pill's. Below that it floats behind. */}
-        <div className="flex flex-1 flex-col justify-end md:justify-center">
-        <div className="md:flex md:items-start md:justify-between md:gap-8 lg:gap-10">
+        <div className="flex flex-1 flex-col justify-center">
+        {/* Below md the disc stacks above the copy (column-reverse, since it is
+            second in the DOM) so the two can never collide on a small screen.
+            From md they sit side by side and items-start pins the disc's top
+            edge to the status pill's. */}
+        <div className="flex flex-col-reverse gap-8 md:flex-row md:items-start md:justify-between lg:gap-10">
         <div ref={copyRef} className="max-w-3xl md:min-w-0 md:flex-1">
           <div
             data-hero-rise
@@ -181,9 +183,12 @@ export function Hero({ ready = true }: { ready?: boolean }) {
             the violet, leaving a duotone cut-out inside a bloom. */}
         <div
           data-hero-disc
-          className="halo pointer-events-none absolute top-[9%] right-[3%] aspect-square w-[58%] max-w-[560px] md:static md:-mr-6 md:w-[34%] md:shrink-0 lg:-mr-10 lg:w-[36%]"
+          className="halo pointer-events-none relative aspect-square w-[54%] max-w-[560px] shrink-0 self-end md:-mr-6 md:w-[34%] md:self-start lg:-mr-10 lg:w-[36%]"
         >
-          <div className="relative h-full w-full overflow-hidden rounded-full bg-[#b3a8f7]">
+          {/* Absolute so the portrait's own 3:4 ratio can't drive this box's
+              height — otherwise the flex column sizes it from content and the
+              disc turns into an oval. */}
+          <div className="absolute inset-0 overflow-hidden rounded-full bg-[#b3a8f7]">
             <img
               src="/portrait.webp"
               alt=""
@@ -199,14 +204,14 @@ export function Hero({ ready = true }: { ready?: boolean }) {
           data-hero-rise
           className="mt-10 flex items-center justify-between gap-4"
         >
-          <div className="glass hidden items-center gap-5 rounded-full px-5 py-2.5 md:inline-flex">
+          <div className="glass hidden items-center gap-5 rounded-full px-5 py-1 md:inline-flex">
             {profile.socials.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="label-mono transition-colors hover:text-chrome"
+                className="label-mono py-1.5 transition-colors hover:text-chrome"
               >
                 {s.label}
               </a>

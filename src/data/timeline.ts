@@ -1,6 +1,6 @@
 /**
  * Based on public details from github.com/isanka23 (@azbow, Colombo,
- * BSc (Hons) Software Engineering graduate).
+ * BEng (Hons) Software Engineering graduate).
  */
 export type Milestone = {
   period: string;
@@ -12,7 +12,7 @@ export type Milestone = {
 export const timeline: Milestone[] = [
   {
     period: "2026",
-    role: "BSc (Hons) Software Engineering with Industrial Placement",
+    role: "BEng (Hons) in Software Engineering with Industrial Placement",
     org: "University of Westminster",
     detail:
       "Graduated with Upper Second Class Honours. Final year project: AquaClean, an underwater waste detection system using computer vision.",

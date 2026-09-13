@@ -18,7 +18,7 @@ export function Footer() {
           <div className="sm:text-center">
             <p className="label-mono">// Status</p>
             <p className="mt-2 font-mono text-xs text-signal">{profile.status}</p>
-            <a href="#projects" className="mt-1 inline-block font-mono text-xs underline underline-offset-4 hover:text-violet">
+            <a href="#projects" className="mt-1 inline-block py-1.5 font-mono text-xs underline underline-offset-4 hover:text-violet">
               View Work
             </a>
           </div>
@@ -44,15 +44,15 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
             {profile.socials.map((s) => (
               <a key={s.label} href={s.href} target="_blank" rel="noreferrer"
-                 className="font-mono text-[11px] text-mist transition-colors hover:text-chrome">
+                 className="inline-block py-1.5 font-mono text-[11px] text-mist transition-colors hover:text-chrome">
                 {s.label}
               </a>
             ))}
-            <a href={`mailto:${profile.email}`} className="font-mono text-[11px] underline underline-offset-4 hover:text-violet">
+            <a href={`mailto:${profile.email}`} className="inline-block py-1.5 font-mono text-[11px] underline underline-offset-4 hover:text-violet">
               {profile.email}
             </a>
           </div>
-          <a href="#home" className="font-mono text-[11px] text-mist hover:text-chrome">
+          <a href="#home" className="inline-block py-1.5 font-mono text-[11px] text-mist hover:text-chrome">
             Back to Top ↑
           </a>
         </div>

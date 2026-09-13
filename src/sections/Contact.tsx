@@ -89,13 +89,13 @@ export function Contact() {
                 </span>
                 <div className="min-w-0">
                   <p className="label-mono">// Primary Channel</p>
-                  <p className="mt-2 truncate font-mono text-base text-chrome sm:text-lg">
+                  <p className="mt-2 font-mono text-sm break-all text-chrome sm:text-lg">
                     {profile.email}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <CopyEmailButton email={profile.email} />
                 <a
                   href={`mailto:${profile.email}`}
@@ -121,7 +121,7 @@ export function Contact() {
             >
               <div className="min-w-0">
                 <p className="text-sm font-semibold">{s.label}</p>
-                <p className="mt-1 truncate font-mono text-[11px] text-mist">
+                <p className="mt-1 font-mono text-[11px] break-all text-mist">
                   {s.href.replace(/^https?:\/\/(www\.)?/, "")}
                 </p>
               </div>

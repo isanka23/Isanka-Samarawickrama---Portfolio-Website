@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+/**
+ * Self-hosted so the faces arrive on the first connection. Loading these from
+ * Google cost a second DNS + TLS handshake to fonts.gstatic.com, which landed
+ * Anton ~1.4s in — long enough to paint the boot wordmark in a fallback face
+ * and then visibly reflow when the real one arrived.
+ *
+ * Latin subsets only; Archivo is the variable file covering 400-700.
+ */
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/anton-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/jetbrains-mono-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/archivo-var.woff2") format("woff2");
+}
+
 @theme {
   --color-void: #08080a;
   --color-ink: #0d0d11;

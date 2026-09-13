@@ -20,9 +20,12 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Isanka Samarawickrama" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- Fonts are self-hosted (see @font-face in src/index.css). Preloading the
+         two faces the boot screen paints means they are in flight alongside the
+         CSS instead of waiting on it, so the wordmark never renders in a
+         fallback and then reflows. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/anton-400.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrains-mono-400.woff2" crossorigin />
   </head>
   <body>
     <div id="root"></div>

@@ -34,7 +34,7 @@ function CopyEmailButton({ email }: { email: string }) {
     <button
       type="button"
       onClick={onCopy}
-      className="glass inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 font-mono text-xs text-mist hover:-translate-y-0.5 hover:text-chrome"
+      className="glass inline-flex items-center justify-center gap-2 rounded-full px-4 py-2.5 font-mono text-[11px] whitespace-nowrap text-mist hover:-translate-y-0.5 hover:text-chrome sm:px-5 sm:py-3 sm:text-xs"
     >
       {copied ? "✓ Copied" : "Copy Email"}
     </button>
@@ -80,9 +80,11 @@ export function Contact() {
         <Reveal delay={100}>
           <div
             onMouseMove={handleSpotlight}
-            className="panel spotlight lift mt-12 rounded-3xl p-8 sm:p-10"
+            className="panel spotlight lift mt-12 rounded-3xl p-5 sm:p-10"
           >
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            {/* Stays stacked until lg: side by side, the email eats the row
+                and leaves the buttons too little space to sit on one line. */}
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="flex items-center gap-5">
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-violet/30 bg-violet/10 text-violet">
                   {mailIcon}
@@ -95,11 +97,11 @@ export function Contact() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <CopyEmailButton email={profile.email} />
                 <a
                   href={`mailto:${profile.email}`}
-                  className="shine glass-bright inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-semibold text-void hover:-translate-y-0.5"
+                  className="shine glass-bright inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-semibold whitespace-nowrap text-void hover:-translate-y-0.5 sm:gap-2 sm:px-6 sm:py-3 sm:text-sm"
                 >
                   Send Email {arrowIcon}
                 </a>

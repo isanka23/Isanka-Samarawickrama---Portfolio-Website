@@ -90,6 +90,7 @@ so the site can be re-skinned for someone else by editing seven files.
 | `projects.ts` | Project carousel cards |
 | `certifications.ts` | Credential grid |
 | `nav.ts` | Nav items and section ids |
+| `cv.ts` | The `/cv` page — summary, skills, experience, projects, education |
 
 ---
 
@@ -97,12 +98,14 @@ so the site can be re-skinned for someone else by editing seven files.
 
 ```
 src/
+├─ pages/        Home (the scroll experience), Resume (/cv)
 ├─ sections/     Hero, About, Philosophy, Expertise, Pipeline,
 │                Skills, Timeline, Projects, Certifications,
 │                Contact, Footer
 ├─ components/   BootLoader, Nav, CursorGlow, Reveal,
 │                SectionLabel, Stat, LocalClock
 ├─ hooks/        useReducedMotion, useSpotlight, useCountUp
+├─ lib/          router (two-page history router, ~40 lines)
 ├─ data/         all site content
 └─ index.css     design tokens + custom utilities
 ```
@@ -111,6 +114,21 @@ The design system is defined once in `src/index.css` — colour tokens, the
 chrome-gradient text treatment, glass surfaces, the spotlight/lift card
 behaviour, aurora and marquee animations — and consumed everywhere through
 utility classes.
+
+---
+
+## The CV page
+
+`/cv` is a second route reached from the **CV** button in the nav. It renders
+the résumé as real text — selectable, searchable, indexable — with the PDF
+one click away.
+
+To refresh it: drop the new file over `public/Isanka-Samarawickrama-CV.pdf`
+and update `src/data/cv.ts` so the page and the download say the same thing.
+
+Routing is a ~40-line history router in `src/lib/router.ts` rather than a
+dependency; `vercel.json` rewrites non-asset paths to `index.html` so a direct
+hit on `/cv` resolves.
 
 ---
 

@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { navItems } from "@/data/nav";
 import { profile } from "@/data/profile";
+import { onRouteClick } from "@/lib/router";
+
+const docIcon = (
+  <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} className="h-3.5 w-3.5 stroke-current">
+    <path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z" strokeLinejoin="round" />
+    <path d="M14 3v5h5" strokeLinejoin="round" />
+  </svg>
+);
 
 export function Nav() {
   const [active, setActive] = useState<string>("home");
@@ -65,12 +73,25 @@ export function Nav() {
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className="shine glass rounded-full px-5 py-2 text-xs font-semibold hover:-translate-y-0.5"
-        >
-          Hire Me
-        </a>
+        {/* The CV lives on its own route, so it sits beside the actions rather
+            than in the section list the scroll-spy tracks. Kept visible at
+            every width — there is no mobile menu to fall back on. */}
+        <div className="flex items-center gap-2 md:gap-3">
+          <a
+            href="/cv"
+            onClick={onRouteClick}
+            className="glass inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold whitespace-nowrap text-mist hover:-translate-y-0.5 hover:text-chrome md:px-5"
+          >
+            {docIcon} CV
+          </a>
+
+          <a
+            href="#contact"
+            className="shine glass rounded-full px-4 py-2 text-xs font-semibold whitespace-nowrap hover:-translate-y-0.5 md:px-5"
+          >
+            Hire Me
+          </a>
+        </div>
       </nav>
     </header>
   );

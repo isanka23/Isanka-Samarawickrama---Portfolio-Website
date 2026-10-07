@@ -82,7 +82,7 @@ export const cvProjects: CvProject[] = [
     title: "Mosam Sujeewa Prasannaarachchi Mobile App",
     role: "Mobile Developer",
     points: [
-      "Built a cross-platform app in Flutter with authentication, API integration, and payments.",
+      "Built a cross-platform app in Flutter with authentication, API integration, payments, and state management.",
       "Handled development, testing, and release on Google Play and the App Store, plus post-launch maintenance.",
     ],
     links: [
@@ -100,7 +100,7 @@ export const cvProjects: CvProject[] = [
     title: "Bhawana Mobile App",
     role: "Mobile Developer",
     points: [
-      "Built a cross-platform app in Flutter with authentication, API integration, and payments.",
+      "Built a cross-platform app in Flutter with authentication, API integration, payments, and state management.",
       "Published to Google Play and the App Store, and shipped ongoing updates and bug fixes.",
     ],
     links: [

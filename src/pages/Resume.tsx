@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { profile } from "@/data/profile";
 import {
   cv,
+  cvAwards,
   cvEducation,
   cvExperience,
   cvProjects,
@@ -213,6 +214,15 @@ export function Resume() {
                         </ul>
                       </li>
                     </Reveal>
+                  ))}
+                </ul>
+              </section>
+
+              <section>
+                <Heading>// Awards</Heading>
+                <ul className="mt-6 space-y-4">
+                  {cvAwards.map((entry, i) => (
+                    <EntryCard key={entry.title} entry={entry} delay={i * 80} />
                   ))}
                 </ul>
               </section>

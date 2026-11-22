@@ -10,26 +10,44 @@ export const cv = {
   file: "/Isanka-Samarawickrama-CV.pdf",
   /** Suggested filename when the visitor saves it. */
   fileName: "Isanka-Samarawickrama-CV.pdf",
-  updated: "October 2026",
-  headline: "Junior Software Engineer — Mobile / Web / Backend",
+  updated: "November 2026",
+  headline: "Full-Stack Software Engineer — Flutter / React / NestJS",
   summary:
-    "Full-stack software engineer with 2 years and 7 months of professional experience building scalable web and cross-platform mobile applications. Works mainly in TypeScript, Next.js, React, Node.js, NestJS and PostgreSQL, with hands-on Flutter and Dart experience for mobile. Builds backend services, REST APIs and responsive interfaces, and handles deployment and hosting. Actively works with AI and new technologies to build smarter, modern products.",
+    "Full-stack engineer at Azbow since May 2025, after a one-year Flutter internship there. Builds Flutter apps, React/Next.js web apps and NestJS/PostgreSQL backends, and integrates AI into production apps. Rising Star Award winner, with final-year research in transformer-based computer vision.",
   phone: "+94 71 952 3132",
 } as const;
 
 export type CvSkillGroup = { group: string; items: string[] };
 
 export const cvSkills: CvSkillGroup[] = [
-  { group: "Frontend", items: ["TypeScript", "Next.js", "React", "Tailwind CSS"] },
+  { group: "Frontend", items: ["TypeScript", "React", "Next.js", "Tailwind CSS"] },
   {
     group: "Backend & Data",
     items: ["Node.js", "NestJS", "REST APIs", "PostgreSQL", "Prisma", "Firebase"],
   },
   {
     group: "Mobile",
-    items: ["Flutter", "Dart", "Provider", "Go Router", "Hive", "SharedPreferences"],
+    items: [
+      "Flutter",
+      "Dart",
+      "Bloc",
+      "Riverpod",
+      "Provider",
+      "Go Router",
+      "Hive",
+      "SharedPreferences",
+    ],
   },
-  { group: "AI & ML", items: ["Python", "PyTorch", "Prompt Engineering"] },
+  {
+    group: "AI & ML",
+    items: [
+      "Python",
+      "PyTorch",
+      "Hugging Face Transformers",
+      "Chatbot Integration",
+      "Prompt Engineering",
+    ],
+  },
   { group: "Tools", items: ["Git", "GitHub", "Vercel"] },
 ];
 
@@ -43,9 +61,23 @@ export type CvEntry = {
 export const cvEducation: CvEntry[] = [
   {
     period: "Jan 2023 — Aug 2026",
-    title: "BEng (Hons) in Software Engineering with Industrial Placement",
-    org: "University of Westminster",
-    points: ["Graduated with Upper Second Class Honours."],
+    title: "BEng (Hons) Software Engineering with Industrial Placement",
+    org: "University of Westminster (Informatics Institute of Technology, Sri Lanka) · Upper Second Class Honours",
+    points: [
+      "Final-year project: AquaClean — Underwater Waste Detection (PyTorch, Hugging Face).",
+      "Two-stage pipeline: an attention-based GAN (CBAM) restores low-light, turbid images, then a fine-tuned DETR transformer (ResNet-50) detects waste.",
+      "Reached mAP50 of 0.726 on Trash-ICRA19; wrote a Pascal VOC to COCO annotation converter.",
+      "CustomTkinter desktop GUI with background-thread inference to keep the UI responsive.",
+    ],
+  },
+];
+
+export const cvAwards: CvEntry[] = [
+  {
+    period: "2026",
+    title: "Rising Star Award",
+    org: "Azbow (Pvt) Ltd",
+    points: ["For strong contributions soon after joining."],
   },
 ];
 
@@ -55,8 +87,9 @@ export const cvExperience: CvEntry[] = [
     title: "Junior Software Engineer — Full Stack",
     org: "Azbow (Pvt) Ltd",
     points: [
-      "Develop full-stack applications end to end, from Flutter mobile apps and Next.js/React web interfaces to Node.js/NestJS backend services, REST APIs, and deployment.",
-      "Integrate AI features into products and use AI tools to speed up development and improve code quality.",
+      "Build client products end to end across Flutter, React/Next.js and Node.js/NestJS with PostgreSQL and Prisma, including REST APIs, auth, deployment and hosting.",
+      "Built an AI chatbot and integrated AI features into production apps.",
+      "Release and maintain apps on Google Play and the App Store, shipping updates and bug fixes.",
     ],
   },
   {
@@ -64,26 +97,27 @@ export const cvExperience: CvEntry[] = [
     title: "Software Engineer Intern — Mobile",
     org: "Azbow (Pvt) Ltd",
     points: [
-      "Completed a one-year internship during my third year of university, specializing in mobile development.",
-      "Developed, tested, and released cross-platform mobile apps using Flutter and Dart, and maintained them after launch.",
+      "One-year industrial placement: developed, tested and released cross-platform Flutter/Dart apps on both stores, and maintained them after launch.",
     ],
   },
 ];
 
 export type CvProject = {
   title: string;
+  /** The project type and stack, shown under the title. */
   role: string;
   points: string[];
   links?: { label: string; href: string }[];
 };
 
+/** Azbow client projects. */
 export const cvProjects: CvProject[] = [
   {
-    title: "Mosam Sujeewa Prasannaarachchi Mobile App",
-    role: "Mobile Developer",
+    title: "Mosam Sujeewa Prasannaarachchi",
+    role: "Novel Reading App · Flutter",
     points: [
-      "Built a cross-platform app in Flutter with authentication, API integration, and payments.",
-      "Handled development, testing, and release on Google Play and the App Store, plus post-launch maintenance.",
+      "Reading app for novels by Sri Lankan author Sujeewa Prasannaarachchi, with auth, API integration and payments.",
+      "Owned development, testing, store release and maintenance.",
     ],
     links: [
       {
@@ -97,11 +131,10 @@ export const cvProjects: CvProject[] = [
     ],
   },
   {
-    title: "Bhawana Mobile App",
-    role: "Mobile Developer",
+    title: "Bhawana",
+    role: "Magazine Reading App · Flutter",
     points: [
-      "Built a cross-platform app in Flutter with authentication, API integration, and payments.",
-      "Published to Google Play and the App Store, and shipped ongoing updates and bug fixes.",
+      "Digital magazine reading app with auth, API integration and payments, released on Google Play and the App Store.",
     ],
     links: [
       {
@@ -112,19 +145,18 @@ export const cvProjects: CvProject[] = [
     ],
   },
   {
-    title: "Classmate Web App",
-    role: "Front-end Web Developer",
+    title: "Classmate",
+    role: "Web App & Admin Dashboard · React, TypeScript",
     points: [
-      "Built the web app and admin dashboard for a UAE-based platform using React and TypeScript, with full Arabic (RTL) support.",
-      "Designed REST APIs with authentication and role-based access for managers and team members.",
+      "Built the web app and admin dashboard for a UAE-based platform with full Arabic (RTL) support.",
     ],
   },
   {
-    title: "Creative Scheduler Web App",
-    role: "Back-end Developer",
+    title: "Creative Scheduler",
+    role: "Backend · NestJS",
     points: [
-      "Built a NestJS backend for managing digital and creative team members, covering scheduling, task assignment, and workload tracking.",
-      "Designed REST APIs with authentication and role-based access for managers and team members.",
+      "NestJS backend for creative teams covering scheduling, task assignment and workload tracking.",
+      "REST APIs with authentication and role-based access for managers and team members.",
     ],
   },
 ];

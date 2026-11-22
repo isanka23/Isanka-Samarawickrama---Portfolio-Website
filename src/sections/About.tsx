@@ -38,8 +38,12 @@ export function About() {
             className="panel spotlight lift group aspect-[4/5] overflow-hidden rounded-3xl"
           >
             <img
-              src="/portrait.webp"
-              alt={profile.fullName}
+              src="/about-portrait.webp"
+              alt={`${profile.fullName} at his University of Westminster graduation`}
+              width={960}
+              height={1200}
+              loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
